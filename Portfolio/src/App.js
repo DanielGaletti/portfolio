@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useState } from 'react';
+import HamburguerMenu from './components/Header';
+import Abstract from './components/Abstract';
 function App() {
+  const [darkTheme, setIsDarkTheme] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={darkTheme ? 'dark-mode' : 'light-mode'}>
+
+      <label className='switch'>
+        <input type="checkbox" onClick={() => setIsDarkTheme(!darkTheme)} />
+        <span className={darkTheme ? 'slider dark-mode-slider' : 'slider light-mode-slider'}></span>
+      </label>
+      
+      <HamburguerMenu mode={darkTheme}/>
+      <Abstract />
     </div>
   );
 }
