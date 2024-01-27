@@ -1,0 +1,123 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-size: 18px
+}
+
+.light-mode{
+  background-color: var(--background-light-theme);
+  height: 100vh;
+  width: 100vw;
+  transition: 0.5s;
+  p, h1, h2, h3, h4, h5, h6{
+    color: var(--text-light-theme);
+    z-index: 1;
+  }
+}
+
+.dark-mode{
+  background-color: var(--background-dark-theme);
+  height: 100vh;
+  width: 100vw;
+  transition: 0.5s;
+  p, h1, h2, h3, h4, h5, h6{
+    color: var(--text-dark-theme);
+    z-index: 1;
+  }
+}
+
+.light-mode-slider{
+  background-color: black;
+}
+
+.dark-mode-slider{
+  background-color: white;
+}
+
+.switch {
+  position: fixed;
+  width: 60px;
+  height: 34px;
+  top:23px;
+  left: 25px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 15%;
+}
+
+.slider:before{
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition:.4s;
+  transition:.4s;
+  border-radius: 50%;
+}
+
+.light-mode-slider:before {
+  background-color: white;
+  content: '💡';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark-mode-slider:before { 
+  background-color: black;
+  content: '🌙';
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+:root{
+  --background-light-theme: #cfcfcf;
+  --text-light-theme: #000000;
+  --details-light-teme: #001F3F;
+  --text-dark-theme: rgba(255, 255, 255);
+  --background-dark-theme: #272525;
+  --details-dark-theme: #a8a8a0;
+}
