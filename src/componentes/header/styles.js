@@ -71,6 +71,17 @@ export const HeaderDescription = styled.div`
     }
 `;
 
+export const Title = styled.div`
+   h1 {
+    margin-bottom: 0px;
+   }
+
+   h2{
+    margin: 0px 0px 20px 0px;
+    font-size: 16px;
+   }
+`;
+
 export const Button = styled.button`
     padding: 5px 10px;
     background-color: ${({ isDarkTheme }) => isDarkTheme ? 'var(--background-light)' : 'var(--background-dark)'};
