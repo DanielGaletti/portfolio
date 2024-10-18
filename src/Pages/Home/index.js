@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Header from "../../componentes/header";
 import Abstract from "../../componentes/abstract";
 import Experience from '../../componentes/experience';
+import Education from '../../componentes/education';
 import Footer from "../../componentes/footer";
 import * as Styled from "./styles.js";
 import { useTheme } from '../../context/ThemeContext.js';
@@ -34,6 +35,7 @@ const Home = () => {
                 <Header />
                 <Abstract />
                 <Experience /> 
+                <Education />
                 <Footer />
             </Styled.Container>
         </>
