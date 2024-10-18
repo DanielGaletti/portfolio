@@ -11,13 +11,16 @@ const Home = () => {
         "%c Welcome to my portfolio! 🎉 \n" +
         "%c This is a space to showcase my work and skills.\n" +
         "%c If you're curious, feel free to explore! 😊\n" +
-        "%c Remember to be kind and respectful! ❤️",
-        "font-size: 24px; color: #3498db; font-weight: bold;", // Style for the welcome message
-        "font-size: 18px; color: #2ecc71;", // Style for the description
-        "font-size: 18px; color: #e74c3c;", // Style for the exploration message
-        "font-size: 18px; color: #f39c12;"  // Style for the reminder
+        "%c Remember to be kind and respectful! ❤️\n\n" +
+        "%c Developed by Daniel Galetti!",
+
+        "font-size: 24px; color: #3498db; font-weight: bold;", 
+        "font-size: 18px; color: #2ecc71;", 
+        "font-size: 18px; color: #e74c3c;", 
+        "font-size: 18px; color: #f39c12;",
+        "font-size: 12px; color: rgba(255, 255, 255, 0.54);"    
       );
-      
+
     const { isDarkTheme } = useTheme();
   
     useEffect(() => {
