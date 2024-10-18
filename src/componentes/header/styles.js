@@ -46,7 +46,7 @@ export const HeaderDescription = styled.div`
     gap: 5px;
 
     p {
-        width: 80%;
+        width: 90%;
         margin: 0 0 10px 0;
         text-align: unset;
     }

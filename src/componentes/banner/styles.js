@@ -25,7 +25,6 @@ export const Banner = styled.div`
     transition: all 0.3s ease-in-out; 
   }
   
-  /* Responsividade */
   @media (max-width: 768px) {
     padding: 15px;
     h2 {
