@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <Styled.Header>
             <Styled.ImageContainer>
-                <Styled.Image src="/myself.png" alt="myself" />
+                <Styled.Image src="https://github.com/DanielGaletti/portfolio/blob/master/public/myself.png?raw=true" alt="myself" />
             </Styled.ImageContainer>
             <Styled.HeaderDescription>
                 <Styled.Button isDarkTheme={isDarkTheme} onClick={toggleTheme}>
