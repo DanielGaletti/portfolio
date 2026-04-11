@@ -1,3 +1,8 @@
+# Publica o conteúdo de `build/` na branch `gh-pages`, compatível com
+# GitHub Pages em "Deploy from a branch" → `gh-pages` / `(root)`.
+# Se no futuro você mudar Pages para "GitHub Actions", pode voltar a usar
+# actions/upload-pages-artifact + actions/deploy-pages.
+
 name: Deploy GitHub Pages
 
 on:
@@ -5,16 +10,14 @@ on:
     branches: [main, master]
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,18 +38,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Push to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: build
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
