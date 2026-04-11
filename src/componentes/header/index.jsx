@@ -17,11 +17,15 @@ const Header = () => (
             </Styled.Badge>
             <Styled.Name>Daniel Galetti</Styled.Name>
             <Styled.Role>Software Engineer</Styled.Role>
-            <Styled.Meta>São Carlos, São Paulo, Brazil — React, Next.js, TypeScript, ML &amp; computer vision.</Styled.Meta>
+            <Styled.Meta>Marília, São Paulo, Brazil — Deep Learning, Python, Pytorch, Data Science, MLOps, Computer Vision, OpenCV, RAG, Cloud, LangChain &amp; Software Engineering.</Styled.Meta>
             <Styled.TagRow>
-                <Styled.MiniTag>Front-end</Styled.MiniTag>
-                <Styled.MiniTag>Chatbots &amp; scale</Styled.MiniTag>
-                <Styled.MiniTag>MSc @ UFSCar</Styled.MiniTag>
+                <Styled.MiniTag>AI Development &amp; Software Engineering</Styled.MiniTag>
+                <Styled.MiniTag>Computer Vision</Styled.MiniTag>
+                <Styled.MiniTag>Data Science</Styled.MiniTag>
+                <Styled.MiniTag>MLOps</Styled.MiniTag>
+                <Styled.MiniTag>Cloud</Styled.MiniTag>
+                <Styled.MiniTag>LangChain</Styled.MiniTag>
+                <Styled.MiniTag>Software Engineering</Styled.MiniTag>
             </Styled.TagRow>
         </Styled.HeaderBody>
     </Styled.Header>

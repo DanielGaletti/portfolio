@@ -3,15 +3,15 @@ import * as Styled from './styles.js';
 const Abstract = () => (
     <>
         <Styled.Lead>
-            Computer Engineering graduate from UTFPR with 4+ years of experience in software engineering,
-            technology consulting, and front-end development. Currently Software Engineer at{' '}
+            Software Engineer with 4+ years of experience, MSc candidate in Computer Science
+            at UFSCar researching Visual Language Models (VLMs) applied to image classification
+            with multimodal inputs. Passionate about building AI-powered systems, with hands-on
+            knowledge in PyTorch, Computer Vision, and applied Machine Learning. At{' '}
             <a href="https://wellhub.com" target="_blank" rel="noreferrer">
                 Wellhub (formerly Gympass)
             </a>
-            , working with ReactJS, Next.js, and TypeScript to build intelligent chatbots and scalable
-            systems. MSc candidate in Computer Science at UFSCar, researching Visual Language Models (VLMs)
-            and AI applied to computer vision. Combines a solid foundation in React, React Native, and the
-            JavaScript ecosystem with advanced knowledge in Machine Learning, Deep Learning, and Data Science.
+            , ships intelligent chatbots and scalable systems serving millions of users, bridging
+            solid front-end expertise with deep interest in intelligent, data-driven products.
         </Styled.Lead>
         <Styled.Download
             href="https://raw.githubusercontent.com/DanielGaletti/portfolio/master/public/vitae.pdf"

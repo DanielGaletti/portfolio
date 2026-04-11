@@ -57,9 +57,7 @@ const BlogList = () => {
             <Styled.PageHeader>
                 <Styled.PageTitle>Blog</Styled.PageTitle>
                 <Styled.PageLead>
-                    Artigos em tópicos — os textos vivem em arquivos Markdown na pasta{' '}
-                    <code>public/blog/</code>. Edite o <code>.md</code>, ajuste o manifest em{' '}
-                    <code>posts.json</code> e faça o deploy.
+                    My posts... just my thoughts.
                 </Styled.PageLead>
             </Styled.PageHeader>
 
