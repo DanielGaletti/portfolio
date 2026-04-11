@@ -1,8 +1,3 @@
-# Publica o conteúdo de `build/` na branch `gh-pages`, compatível com
-# GitHub Pages em "Deploy from a branch" → `gh-pages` / `(root)`.
-# Se no futuro você mudar Pages para "GitHub Actions", pode voltar a usar
-# actions/upload-pages-artifact + actions/deploy-pages.
-
 name: Deploy GitHub Pages
 
 on:
