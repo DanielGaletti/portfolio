@@ -1,7 +1,3 @@
-/**
- * Parses simple YAML-like frontmatter from a Markdown string.
- * Supports single-line string values (optionally quoted).
- */
 export function parseFrontmatter(raw) {
     const trimmed = raw.replace(/^\uFEFF/, '');
     const match = trimmed.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);

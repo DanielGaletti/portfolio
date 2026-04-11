@@ -54,7 +54,7 @@ const BlogPost = () => {
     if (state.error) {
         return (
             <>
-                <Styled.BackLink to="/blog">← Voltar ao blog</Styled.BackLink>
+                <Styled.BackLink to="/blog">← Back to my blog</Styled.BackLink>
                 <Styled.ErrorText>{state.error}</Styled.ErrorText>
             </>
         );
@@ -62,7 +62,7 @@ const BlogPost = () => {
 
     return (
         <>
-            <Styled.BackLink to="/blog">← Voltar ao blog</Styled.BackLink>
+            <Styled.BackLink to="/blog">← Back to my blog</Styled.BackLink>
             <Styled.ArticleShell>
                 <Styled.ArticleTitle>{state.data.title}</Styled.ArticleTitle>
                 {state.data.date ? <Styled.ArticleMeta>{state.data.date}</Styled.ArticleMeta> : null}
