@@ -1,7 +1,7 @@
 ---
 title: AI Will Replace Me?
 date: 2026-04-11
-tags: [AI, Software Engineering, Career]
+tags: AI, Software Engineering, Career
 excerpt: A Computer Science MSc student reflects on the fear every developer has felt, and why it might paradoxically be the best sign that you are on the right path.
 ---
 
