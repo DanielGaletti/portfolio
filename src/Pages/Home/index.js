@@ -1,41 +1,43 @@
-import React, { useEffect } from 'react';
-import Header from "../../componentes/header";
-import Abstract from "../../componentes/abstract";
+import React from 'react';
+import Header from '../../componentes/header';
+import Section from '../../componentes/section';
+import Abstract from '../../componentes/abstract';
+import Skills from '../../componentes/skills';
 import Experience from '../../componentes/experience';
 import Education from '../../componentes/education';
-import Footer from "../../componentes/footer";
-import * as Styled from "./styles.js";
-import { useTheme } from '../../context/ThemeContext.js';
+import Research from '../../componentes/research';
+import Certifications from '../../componentes/certifications';
+import Volunteer from '../../componentes/volunteer';
+import Footer from '../../componentes/footer';
+import * as Styled from './styles.js';
 
 const Home = () => {
-    console.log(
-        "%c Welcome to my portfolio! 🎉 \n" +
-        "%c This is a space to showcase my work and skills.\n" +
-        "%c If you're curious, feel free to explore! 😊\n" +
-        "%c Remember to be kind and respectful! ❤️\n\n" +
-        "%c Developed by Daniel Galetti!",
-
-        "font-size: 24px; color: #3498db; font-weight: bold;", 
-        "font-size: 18px; color: #2ecc71;", 
-        "font-size: 18px; color: #e74c3c;", 
-        "font-size: 18px; color: #f39c12;",
-        "font-size: 12px; color: rgba(255, 255, 255, 0.54);"    
-      );
-
-    const { isDarkTheme } = useTheme();
-  
-    useEffect(() => {
-        document.body.className = isDarkTheme ? 'dark' : 'light';
-    }, [isDarkTheme]);
-
     return (
         <>
             <Styled.GlobalStyles />
             <Styled.Container>
                 <Header />
-                <Abstract />
-                <Experience /> 
-                <Education />
+                <Section id="summary" title="Professional Summary">
+                    <Abstract />
+                </Section>
+                <Section id="skills" title="Technical Skills">
+                    <Skills />
+                </Section>
+                <Section id="experience" title="Professional Experience">
+                    <Experience />
+                </Section>
+                <Section id="education" title="Education">
+                    <Education />
+                </Section>
+                <Section id="research" title="AI Research & Projects">
+                    <Research />
+                </Section>
+                <Section id="certs" title="Certifications & Languages">
+                    <Certifications />
+                </Section>
+                <Section id="volunteer" title="Volunteer Activities">
+                    <Volunteer />
+                </Section>
                 <Footer />
             </Styled.Container>
         </>

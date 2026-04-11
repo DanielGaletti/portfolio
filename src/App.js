@@ -1,13 +1,7 @@
-import { ThemeProvider } from './context/ThemeContext';
 import Home from './Pages/Home';
 
 function App() {
-
-    return (
-        <ThemeProvider>
-            <Home />
-        </ThemeProvider>
-    );
+    return <Home />;
 }
 
 export default App;

@@ -1,19 +1,15 @@
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
-
-export const Container = styled.div`
-    max-width: 700px;
-    margin: 50px auto;
-`;
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-body.light {
-  background-color: var(--background-light);
-  color: var(--text-light);
-}
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+`;
 
-body.dark {
-  background-color: var(--background-dark);
-  color: var(--text-dark);
-}
+export const Container = styled.main`
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
 `;

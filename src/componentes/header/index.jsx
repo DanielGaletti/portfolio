@@ -1,28 +1,56 @@
-import * as Styled from "./styles.js";
-import { useTheme } from '../../context/ThemeContext.js';
+import * as Styled from './styles.js';
 
-const Header = () => {
-    const { isDarkTheme, toggleTheme } = useTheme();
-    return (
+const nav = [
+    { href: '#summary', label: 'Summary' },
+    { href: '#skills', label: 'Skills' },
+    { href: '#experience', label: 'Experience' },
+    { href: '#education', label: 'Education' },
+    { href: '#research', label: 'Research' },
+    { href: '#certs', label: 'Certs & Languages' },
+    { href: '#volunteer', label: 'Volunteer' },
+];
+
+const Header = () => (
+    <>
+        <Styled.Nav aria-label="Page sections">
+            <Styled.NavInner>
+                {nav.map(({ href, label }) => (
+                    <Styled.NavLink key={href} href={href}>
+                        {label}
+                    </Styled.NavLink>
+                ))}
+            </Styled.NavInner>
+        </Styled.Nav>
+        <Styled.TopBar>
+            <span>(14) 99809-0506</span>
+            <span aria-hidden="true">·</span>
+            <a href="mailto:danielgaletti70@gmail.com">danielgaletti70@gmail.com</a>
+            <span aria-hidden="true">·</span>
+            <a href="https://www.linkedin.com/in/danielgaletti/" target="_blank" rel="noreferrer">
+                LinkedIn
+            </a>
+            <span aria-hidden="true">·</span>
+            <a href="https://github.com/DanielGaletti" target="_blank" rel="noreferrer">
+                GitHub
+            </a>
+        </Styled.TopBar>
+        <Styled.TopRule />
         <Styled.Header>
             <Styled.ImageContainer>
-                <Styled.Image src="https://github.com/DanielGaletti/portfolio/blob/master/public/myself.png?raw=true" alt="myself" />
+                <Styled.Image
+                    src="https://github.com/DanielGaletti/portfolio/blob/master/public/myself.png?raw=true"
+                    alt="Daniel Galetti"
+                />
             </Styled.ImageContainer>
             <Styled.HeaderDescription>
-                <Styled.Button isDarkTheme={isDarkTheme} onClick={toggleTheme}>
-                    {isDarkTheme ? '☀️' : '🌙'}
-                </Styled.Button>
-                <Styled.Title>
-                    <h1> Daniel Galetti </h1>
-                    <h2> Software Engineer</h2>
-                </Styled.Title>
-                <p>São Carlos, São Paulo, Brazil <br />
-                    +55 (14) 9 9809-0506 <br />
-                    <a href="mailto:danielgaletti70@gmail.com">Contact me</a> <br />
-                    <a href="https://www.linkedin.com/in/danielgaletti/" target="_blank" rel="noreferrer">LinkedIn </a> </p>
+                <Styled.Name>Daniel Galetti</Styled.Name>
+                <Styled.Role>Software Engineer</Styled.Role>
+                <Styled.Meta>
+                    São Carlos, São Paulo, Brazil
+                </Styled.Meta>
             </Styled.HeaderDescription>
         </Styled.Header>
-    )
-}
+    </>
+);
 
 export default Header;

@@ -1,14 +1,11 @@
-import * as Styled from "./styles.js";
-import { useTheme } from '../../context/ThemeContext.js';
+import * as Styled from './styles.js';
 
-const Footer = () => {
-    const { isDarkTheme } = useTheme();
-    return (
-        <>
-            <Styled.Footer isDarkTheme={isDarkTheme}>This is a personal page. Its contents are of entire responsability of Daniel Galetti.
-                <br />© 2024 Daniel Galetti</Styled.Footer>
-        </>
-    )
-}
+const Footer = () => (
+    <Styled.Footer>
+        Personal page — contents are the sole responsibility of Daniel Galetti.
+        <br />
+        © {new Date().getFullYear()} Daniel Galetti
+    </Styled.Footer>
+);
 
 export default Footer;
