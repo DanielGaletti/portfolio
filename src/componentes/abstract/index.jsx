@@ -1,17 +1,25 @@
-import * as Styled from "./styles.js";
+import * as Styled from './styles.js';
 
-const Abstract = () => {
-    return (
-        <>
-            <h1> Abstract </h1>
-            <p>
-                I am a Computer Engineer currently pursuing a Master’s degree specializing in Computer Vision, particularly in Vision Language Models (VLM) and machine learning from Federal University of São Carlos (UFSCar). <br />With a strong foundation from the Federal Technological University of Paraná, I have experience in web development and am skilled in technologies like React, TypeScript, and JavaScript. My professional journey includes roles at Via Consulting and Gympass, where I focus on enhancing user experiences through efficient code and design systems. I am eager to connect with students and collaborators interested in research opportunities in computer vision and AI. Feel free to reach out!
-            </p>
-            <Styled.Download href="https://raw.githubusercontent.com/DanielGaletti/portfolio/master/public/vitae.pdf" download>
-                    Download my Resumé
-            </Styled.Download>
-        </>
-    )
-};
+const Abstract = () => (
+    <>
+        <Styled.Lead>
+            Computer Engineering graduate from UTFPR with 4+ years of experience in software engineering,
+            technology consulting, and front-end development. Currently Software Engineer at{' '}
+            <a href="https://wellhub.com" target="_blank" rel="noreferrer">
+                Wellhub (formerly Gympass)
+            </a>
+            , working with ReactJS, Next.js, and TypeScript to build intelligent chatbots and scalable
+            systems. MSc candidate in Computer Science at UFSCar, researching Visual Language Models (VLMs)
+            and AI applied to computer vision. Combines a solid foundation in React, React Native, and the
+            JavaScript ecosystem with advanced knowledge in Machine Learning, Deep Learning, and Data Science.
+        </Styled.Lead>
+        <Styled.Download
+            href="https://raw.githubusercontent.com/DanielGaletti/portfolio/master/public/vitae.pdf"
+            download
+        >
+            Download résumé (PDF)
+        </Styled.Download>
+    </>
+);
 
 export default Abstract;

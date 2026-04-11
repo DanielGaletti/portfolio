@@ -1,37 +1,36 @@
 import styled from 'styled-components';
 
-export const EducationContainer = styled.div`
-    margin-top: 100px;
-`
+export const Entry = styled.article`
+    margin-bottom: 1.5rem;
 
-export const Table = styled.table`
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-`;
-
-export const TableHeader = styled.th`
-    padding: 15px;
-    text-align: left;
-    background-color: #4caf50;
-    color: white;
-`;
-
-export const TableData = styled.td`
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-`;
-
-export const TableRow = styled.tr`
-    &:hover {
-        background-color: rgb(99, 113, 148);
-        cursor: pointer;
+    &:last-child {
+        margin-bottom: 0;
     }
 `;
 
+export const Degree = styled.h3`
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 0.25rem 0;
+`;
 
-export const DetailsRow = styled.tr`
-    display: ${props => (props.show ? 'table-row' : 'none')};
-    background-color: ${props => (props.show ? 'rgb(99, 113, 148)' : 'none')}; 
+export const Meta = styled.p`
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 0 0 0.45rem 0;
+`;
+
+export const Org = styled.span`
+    color: var(--teal);
+    font-weight: 600;
+    font-style: normal;
+`;
+
+export const Body = styled.p`
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--text);
+    margin: 0;
 `;

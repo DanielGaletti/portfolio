@@ -1,34 +1,57 @@
-import Banner from '../banner/index.jsx';
-import * as Styled from "./styles.js";
+import * as Styled from './styles';
 
-const Experience = () => {
-    return (
-        <>
-            <Styled.ExperienceTitle> Experience </Styled.ExperienceTitle>
-            <Banner>
-                <h2> Wellhub Company, 2022 - Present </h2>
-                <p> I have been working as a Software Developer at Wellhub (Old gympass) Company since 2022. <br />
-                    I am responsible for developing the service channels page, as well as creating and maintaining
-                    the help and chatbot pages, which receive around 10,000 daily visits.
-                    <br /> One of my key achievements was the creation of the new help center and integration with
-                    external systems, utilizing a Server-Side Rendering architecture with accessibility features implemented.
-                    <br /> <br />Technologies used: NextJS, TypeScript, Datadog, Snowplow, Segment, ReactJS. </p>
-            </Banner>
-            <Banner>
-                <h2> Via Consulting Company, 2020 - 2022 </h2>
-                <p> I worked as a software consultant from 2020 to 2022. 
-                <br /> I was responsible for configuring software environments and developing applications using AngularJS, 
-                primarily focused on CRM systems such as Zendesk. 
-                <br /> <br />Technologies used: Javascript, AngularJS, Handlebars, Zendesk, Salfesforce </p>
-            </Banner>
-            <Banner>
-                <h2> 2D Verse Junior Company, 2017-2018 </h2>
-                <p> I worked as a Junior Developer at 2D Verse student-run company. 
-                <br />I was responsible for developing games using Unity and all documentation
-                <br /> <br />Technologies used: C#, Unity, Google Docs</p>
-            </Banner>
-        </>
-    )
-};
+const Experience = () => (
+    <>
+        <Styled.Job>
+            <Styled.JobHeader>
+                <Styled.JobLine>
+                    <Styled.JobTitle>Software Engineer</Styled.JobTitle>
+                    <Styled.Sep>|</Styled.Sep>
+                    <Styled.Company>
+                        <a href="https://wellhub.com" target="_blank" rel="noreferrer">
+                            Wellhub (formerly Gympass)
+                        </a>
+                    </Styled.Company>
+                </Styled.JobLine>
+                <Styled.Dates>Nov 2022 – Present</Styled.Dates>
+            </Styled.JobHeader>
+            <Styled.List>
+                <li>
+                    Development of intelligent chatbots and help center systems using ReactJS, Next.js, and
+                    TypeScript, serving millions of users.
+                </li>
+                <li>
+                    Active participation in architecture decisions and technical leadership of the chatbot
+                    library, integrating REST APIs and accessibility standards.
+                </li>
+                <li>
+                    Implementation of automated testing (unit and E2E with Jest and Cypress) in an agile
+                    environment.
+                </li>
+                <li>Creation of CI/CD pipelines with GitHub Actions for deploy automation.</li>
+                <li>Development of libraries for data monitoring and analytics of user interactions.</li>
+                <li>Integrations with external APIs and creation of reusable wrappers.</li>
+            </Styled.List>
+        </Styled.Job>
+
+        <Styled.Job>
+            <Styled.JobHeader>
+                <Styled.JobLine>
+                    <Styled.JobTitle>Technology Consultant</Styled.JobTitle>
+                    <Styled.Sep>|</Styled.Sep>
+                    <Styled.Company>Via Consulting</Styled.Company>
+                </Styled.JobLine>
+                <Styled.Dates>Sep 2021 – Oct 2022</Styled.Dates>
+            </Styled.JobHeader>
+            <Styled.List>
+                <li>Development of web applications in AngularJS for large enterprise clients.</li>
+                <li>Administration of CRM systems and process automation for multiple companies.</li>
+                <li>Creation of complete help centers for mid-sized companies.</li>
+                <li>Implementation of Web Accessibility standards (WCAG) in UI components.</li>
+                <li>Analysis and investigation of metrics and data to support decision-making.</li>
+            </Styled.List>
+        </Styled.Job>
+    </>
+);
 
 export default Experience;
