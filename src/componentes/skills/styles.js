@@ -2,27 +2,39 @@ import styled from 'styled-components';
 
 export const Grid = styled.div`
     display: grid;
-    gap: 1.15rem;
+    gap: 1.35rem;
 
-    @media (min-width: 600px) {
+    @media (min-width: 640px) {
         grid-template-columns: repeat(2, 1fr);
     }
 `;
 
 export const Block = styled.div`
-    padding: 0;
+    padding: 0.65rem 0.5rem 0;
 `;
 
 export const Category = styled.h3`
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--text);
-    margin: 0 0 0.4rem 0;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 0.65rem 0;
 `;
 
-export const Detail = styled.p`
-    font-size: 0.92rem;
-    line-height: 1.55;
-    color: var(--text-muted);
-    margin: 0;
+export const Chips = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+`;
+
+export const Chip = styled.span`
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--navy-soft);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(241, 245, 249, 0.9));
+    border: 1px solid var(--border-strong);
+    padding: 0.35rem 0.65rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
 `;
