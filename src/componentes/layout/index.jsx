@@ -26,7 +26,7 @@ const Layout = ({ children }) => (
         <SiteNav />
         <Styled.Main>{children}</Styled.Main>
         <Styled.SiteFooter>
-            Página pessoal — conteúdo de responsabilidade de Daniel Galetti.
+            Personal site. Content is the sole responsibility of Daniel Galetti.
             <br />© {new Date().getFullYear()} Daniel Galetti
         </Styled.SiteFooter>
     </Styled.PageRoot>

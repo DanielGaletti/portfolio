@@ -37,4 +37,22 @@ export const Chip = styled.span`
     padding: 0.35rem 0.65rem;
     border-radius: 10px;
     box-shadow: var(--shadow-sm);
+
+    ${({ $accent }) =>
+        $accent &&
+        `
+        color: var(--navy);
+        font-weight: 700;
+        border-color: rgba(13, 148, 136, 0.45);
+        background: linear-gradient(180deg, rgba(13, 148, 136, 0.12), rgba(255, 255, 255, 0.92));
+        box-shadow: 0 2px 8px rgba(13, 148, 136, 0.12);
+    `}
+`;
+
+export const Subtitle = styled.p`
+    margin: -0.35rem 0 0.55rem 0;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+    font-weight: 500;
 `;

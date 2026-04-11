@@ -40,7 +40,11 @@ const Home = () => (
         >
             <Abstract />
         </Section>
-        <Section id="skills" title="Technical skills" subtitle="Tools and stacks across web, ML, and delivery.">
+        <Section
+            id="skills"
+            title="Technical skills"
+            subtitle="Software engineering with React/Next, foundations in ML, and AI engineering, including MLOps, RAG, and production ML."
+        >
             <Skills />
         </Section>
         <Section id="experience" title="Professional experience" subtitle="Roles where I shipped and scaled software.">

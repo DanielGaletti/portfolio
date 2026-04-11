@@ -17,7 +17,10 @@ const Header = () => (
             </Styled.Badge>
             <Styled.Name>Daniel Galetti</Styled.Name>
             <Styled.Role>Software Engineer</Styled.Role>
-            <Styled.Meta>Marília, São Paulo, Brazil — Deep Learning, Python, Pytorch, Data Science, MLOps, Computer Vision, OpenCV, RAG, Cloud, LangChain &amp; Software Engineering.</Styled.Meta>
+            <Styled.Meta>
+                Marília, São Paulo, Brazil. Deep Learning, Python, Pytorch, Data Science, MLOps, Computer Vision,
+                OpenCV, RAG, Cloud, LangChain &amp; Software Engineering.
+            </Styled.Meta>
             <Styled.TagRow>
                 <Styled.MiniTag>AI Development &amp; Software Engineering</Styled.MiniTag>
                 <Styled.MiniTag>Computer Vision</Styled.MiniTag>

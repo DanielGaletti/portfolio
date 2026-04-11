@@ -13,7 +13,7 @@ const Experience = () => (
                         </a>
                     </Styled.Company>
                 </Styled.JobLine>
-                <Styled.Dates>Nov 2022 – Present</Styled.Dates>
+                <Styled.Dates>Nov 2022 - Present</Styled.Dates>
             </Styled.JobHeader>
             <Styled.List>
                 <li>
@@ -41,7 +41,7 @@ const Experience = () => (
                     <Styled.Sep>|</Styled.Sep>
                     <Styled.Company>Via Consulting</Styled.Company>
                 </Styled.JobLine>
-                <Styled.Dates>Sep 2021 – Oct 2022</Styled.Dates>
+                <Styled.Dates>Sep 2021 - Oct 2022</Styled.Dates>
             </Styled.JobHeader>
             <Styled.List>
                 <li>Development of web applications in AngularJS for large enterprise clients.</li>

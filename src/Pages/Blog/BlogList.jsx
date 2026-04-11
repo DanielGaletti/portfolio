@@ -5,7 +5,7 @@ import * as Styled from './styles';
 
 async function loadPosts() {
     const indexRes = await fetch(blogUrl('posts.json'));
-    if (!indexRes.ok) throw new Error('Não foi possível carregar a lista de posts.');
+    if (!indexRes.ok) throw new Error('Could not load the post list.');
     const index = await indexRes.json();
     const slugs = Array.isArray(index.slugs) ? index.slugs : [];
 
@@ -45,7 +45,7 @@ const BlogList = () => {
                 if (!cancelled) setPosts(data);
             })
             .catch((e) => {
-                if (!cancelled) setError(e.message || 'Erro ao carregar o blog.');
+                if (!cancelled) setError(e.message || 'Failed to load the blog.');
             });
         return () => {
             cancelled = true;
@@ -63,10 +63,10 @@ const BlogList = () => {
 
             {error ? <Styled.ErrorText>{error}</Styled.ErrorText> : null}
 
-            {!error && posts === null ? <Styled.Muted>Carregando…</Styled.Muted> : null}
+            {!error && posts === null ? <Styled.Muted>Loading…</Styled.Muted> : null}
 
             {!error && posts && posts.length === 0 ? (
-                <Styled.Muted>Nenhum post cadastrado ainda. Adicione slugs em public/blog/posts.json.</Styled.Muted>
+                <Styled.Muted>No posts yet. Add slugs to public/blog/posts.json.</Styled.Muted>
             ) : null}
 
             {posts && posts.length > 0 ? (

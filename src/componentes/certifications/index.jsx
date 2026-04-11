@@ -2,8 +2,8 @@ import * as Styled from './styles';
 
 const certs = [
     'Zendesk Administrator',
-    "O'Reilly – ReactJS Developer",
-    'IBM – Machine Learning Foundations',
+    "O'Reilly - ReactJS Developer",
+    'IBM - Machine Learning Foundations',
 ];
 
 const Certifications = () => (
