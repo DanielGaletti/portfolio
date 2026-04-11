@@ -17,7 +17,7 @@ const Abstract = () => (
             href="https://raw.githubusercontent.com/DanielGaletti/portfolio/master/public/vitae.pdf"
             download
         >
-            Download résumé (PDF)
+            Download resume (PDF)
         </Styled.Download>
     </>
 );

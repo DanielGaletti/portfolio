@@ -17,7 +17,7 @@ const BlogPost = () => {
         (async () => {
             try {
                 const res = await fetch(blogUrl(`${slug}.md`));
-                if (!res.ok) throw new Error('Post não encontrado.');
+                if (!res.ok) throw new Error('Post not found.');
                 const raw = await res.text();
                 const { data, content } = parseFrontmatter(raw);
                 if (!cancelled) {
@@ -35,7 +35,7 @@ const BlogPost = () => {
                 if (!cancelled) {
                     setState({
                         loading: false,
-                        error: e.message || 'Erro ao carregar o post.',
+                        error: e.message || 'Failed to load this post.',
                         data: null,
                     });
                 }
@@ -48,7 +48,7 @@ const BlogPost = () => {
     }, [slug]);
 
     if (state.loading) {
-        return <Styled.Muted>Carregando…</Styled.Muted>;
+        return <Styled.Muted>Loading…</Styled.Muted>;
     }
 
     if (state.error) {
