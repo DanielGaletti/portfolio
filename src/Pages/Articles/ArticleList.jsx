@@ -4,14 +4,15 @@ import { parseFrontmatter } from '../../utils/parseFrontmatter';
 import * as Styled from './styles';
 
 async function loadArticles() {
-    const indexRes = await fetch('/articles/articles.json');
+    const base = process.env.PUBLIC_URL || '';
+    const indexRes = await fetch(`${base}/articles/articles.json`);
     if (!indexRes.ok) throw new Error('Could not load the articles list.');
     const index = await indexRes.json();
     const slugs = Array.isArray(index.slugs) ? index.slugs : [];
 
     const entries = await Promise.all(
         slugs.map(async (slug) => {
-            const res = await fetch(`/articles/${slug}.md`);
+            const res = await fetch(`${base}/articles/${slug}.md`);
             if (!res.ok) return null;
             const raw = await res.text();
             const { data, content } = parseFrontmatter(raw);
@@ -80,6 +81,9 @@ const ArticleList = () => {
 
     return (
         <Styled.ArticleListRoot>
+            <Styled.Disclaimer>
+                These articles are selected by an AI agent I built that updates this list weekly, based on my research interests and recent papers I find relevant. They are not written by me, I just find them interesting and worth sharing.
+            </Styled.Disclaimer>
             <Styled.ArticlesGrid>
                 {articles.map((article) => (
                     <Link key={article.slug} to={`/articles/${article.slug}`}>

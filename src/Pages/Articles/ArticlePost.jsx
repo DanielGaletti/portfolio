@@ -15,8 +15,11 @@ const ArticlePost = () => {
 
         (async () => {
             try {
-                const res = await fetch(`/articles/${slug}.md`);
+                const base = process.env.PUBLIC_URL || '';
+                const res = await fetch(`${base}/articles/${slug}.md`);
                 if (!res.ok) throw new Error('Article not found.');
+                const contentType = res.headers.get('content-type') || '';
+                if (contentType.includes('text/html')) throw new Error('Article not found.');
                 const raw = await res.text();
                 const { data, content } = parseFrontmatter(raw);
                 if (!cancelled) {

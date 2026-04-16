@@ -7,7 +7,7 @@ import ArticleList from './Pages/Articles/ArticleList';
 import ArticlePost from './Pages/Articles/ArticlePost';
 
 function App() {
-    const basename = process.env.PUBLIC_URL || '';
+    const basename = process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL || '' : '';
 
     return (
         <BrowserRouter basename={basename}>

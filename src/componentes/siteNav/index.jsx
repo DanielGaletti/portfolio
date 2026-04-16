@@ -12,7 +12,7 @@ const SiteNav = () => (
                     Portfolio
                 </Styled.TabLink>
                 <Styled.TabLink to="/blog">Blog</Styled.TabLink>
-                <Styled.TabLink to="/articles">Artigos</Styled.TabLink>
+                <Styled.TabLink to="/articles">Articles</Styled.TabLink>
             </Styled.Links>
         </Styled.Inner>
     </Styled.Nav>
