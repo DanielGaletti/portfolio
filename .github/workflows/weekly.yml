@@ -52,4 +52,5 @@ jobs:
             git push
           else
             echo "Nenhuma mudança para fazer commit"
+          fi
         continue-on-error: true
