@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import List
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-from langchain.schema import HumanMessage
+from langchain_core.messages import HumanMessage
 from git import Repo
 import logging
 
