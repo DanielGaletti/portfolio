@@ -82,7 +82,7 @@ const ArticleList = () => {
     return (
         <Styled.ArticleListRoot>
             <Styled.Disclaimer>
-                These articles are selected by an AI agent I built that updates this list weekly, based on my research interests and recent papers I find relevant. They are not written by me — I just find them interesting and worth sharing.
+                These articles are selected by an AI agent I built that updates this list weekly, based on my research interests and recent papers I find relevant. They are not written by me, I just find them interesting and worth sharing.
             </Styled.Disclaimer>
             <Styled.ArticlesGrid>
                 {articles.map((article) => (
