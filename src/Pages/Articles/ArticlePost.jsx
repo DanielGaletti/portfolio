@@ -55,7 +55,7 @@ const ArticlePost = () => {
     if (state.loading) {
         return (
             <Styled.ArticlePostRoot>
-                <Styled.Loading>Carregando artigo...</Styled.Loading>
+                <Styled.Loading>Loading article...</Styled.Loading>
             </Styled.ArticlePostRoot>
         );
     }
@@ -64,7 +64,7 @@ const ArticlePost = () => {
         return (
             <Styled.ArticlePostRoot>
                 <Styled.ErrorMsg>{state.error}</Styled.ErrorMsg>
-                <Link to="/articles">← Voltar para artigos</Link>
+                <Link to="/articles">← Back to articles</Link>
             </Styled.ArticlePostRoot>
         );
     }
@@ -74,17 +74,17 @@ const ArticlePost = () => {
     return (
         <Styled.ArticlePostRoot>
             <Link to="/articles" className="back-link">
-                ← Voltar para artigos
+                ← Back to articles
             </Link>
             <Styled.ArticleHeader>
                 <Styled.PostTitle>{data.title}</Styled.PostTitle>
                 <Styled.PostMeta>
                     <span className="date">{data.date}</span>
-                    {data.authors && <span className="authors">Por: {data.authors}</span>}
+                    {data.authors && <span className="authors">By: {data.authors}</span>}
                 </Styled.PostMeta>
                 {data.arxivUrl && (
                     <Styled.ArxivLink href={data.arxivUrl} target="_blank" rel="noreferrer">
-                        Ver no arXiv →
+                        View on arXiv →
                     </Styled.ArxivLink>
                 )}
                 {data.tags.length > 0 && (

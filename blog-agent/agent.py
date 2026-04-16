@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+giyt #!/usr/bin/env python3
 """
 Blog Agent - Semanalmente busca artigos no arXiv sobre IA e Visão Computacional
 e popula o blog com os 3 mais interessantes.

@@ -65,7 +65,7 @@ const ArticleList = () => {
     if (!articles) {
         return (
             <Styled.ArticleListRoot>
-                <Styled.Loading>Carregando artigos...</Styled.Loading>
+                <Styled.Loading>Loading articles...</Styled.Loading>
             </Styled.ArticleListRoot>
         );
     }
@@ -73,7 +73,7 @@ const ArticleList = () => {
     if (articles.length === 0) {
         return (
             <Styled.ArticleListRoot>
-                <Styled.Empty>Nenhum artigo disponível ainda.</Styled.Empty>
+                <Styled.Empty>No articles available yet.</Styled.Empty>
             </Styled.ArticleListRoot>
         );
     }
@@ -87,7 +87,7 @@ const ArticleList = () => {
                             <Styled.ArticleTitle>{article.title}</Styled.ArticleTitle>
                             <Styled.ArticleDate>{article.date}</Styled.ArticleDate>
                             {article.authors && (
-                                <Styled.ArticleAuthors>Por: {article.authors}</Styled.ArticleAuthors>
+                                <Styled.ArticleAuthors>By: {article.authors}</Styled.ArticleAuthors>
                             )}
                             <Styled.ArticlePreview>{article.preview}</Styled.ArticlePreview>
                             {article.tags.length > 0 && (
