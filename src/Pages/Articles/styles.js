@@ -6,6 +6,17 @@ export const ArticleListRoot = styled.div`
     padding: 2rem 1.5rem;
 `;
 
+export const Disclaimer = styled.p`
+    font-size: 0.9rem;
+    color: var(--text-secondary, #666);
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+    padding: 0.875rem 1rem;
+    border-left: 3px solid var(--accent-color, #666);
+    background: var(--card-bg, #f9f9f9);
+    border-radius: 0 4px 4px 0;
+`;
+
 export const ArticlesGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

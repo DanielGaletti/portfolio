@@ -1,7 +1,7 @@
-giyt #!/usr/bin/env python3
+#!/usr/bin/env python3
 """
-Blog Agent - Semanalmente busca artigos no arXiv sobre IA e Visão Computacional
-e popula o blog com os 3 mais interessantes.
+Blog Agent - Weekly search for AI and Computer Vision articles on arXiv
+and populate the blog with the 3 most interesting ones.
 """
 
 import os
@@ -34,13 +34,13 @@ class BlogAgent:
         try:
             self.llm = self.create_llm()
         except Exception:
-            logger.error("Não foi possível inicializar o ChatGroq. Verifique GROQ_API_KEY.")
+            logger.error("Could not initialize ChatGroq. Check GROQ_API_KEY.")
 
     def create_llm(self):
         if not GROQ_API_KEY:
             raise ValueError(
-                "A variável de ambiente GROQ_API_KEY não está definida. "
-                "Defina-a no arquivo .env ou no ambiente antes de executar o agente."
+                "GROQ_API_KEY environment variable is not set. "
+                "Set it in the .env file or in the environment before running the agent."
             )
 
         model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
@@ -52,23 +52,23 @@ class BlogAgent:
 
     def fetch_arxiv_articles(self, max_results: int = 50) -> List[dict]:
         last_week = datetime.now() - timedelta(days=7)
-        
+
         query = (
             'cat:cs.AI OR cat:cs.CV AND '
-            'submittedDate:[' + last_week.strftime('%Y%m%d') + '000000 TO ' + 
+            'submittedDate:[' + last_week.strftime('%Y%m%d') + '000000 TO ' +
             datetime.now().strftime('%Y%m%d') + '235959]'
         )
-        
+
         client = arxiv.Client()
         articles = []
-        
+
         search = arxiv.Search(
             query=query,
             max_results=max_results,
             sort_by=arxiv.SortCriterion.SubmittedDate,
             sort_order=arxiv.SortOrder.Descending
         )
-        
+
         for result in client.results(search):
             articles.append({
                 'title': result.title,
@@ -76,165 +76,162 @@ class BlogAgent:
                 'summary': result.summary,
                 'arxiv_id': result.entry_id.split('/abs/')[-1],
                 'published': result.published.isoformat(),
-                'arxiv_url': getattr(result, 'source_url', result.entry_id),
+                'arxiv_url': 'https://arxiv.org/abs/' + result.entry_id.split('/abs/')[-1],
                 'categories': result.categories
             })
-        
-        logger.info(f"Encontrados {len(articles)} artigos")
+
+        logger.info(f"Found {len(articles)} articles")
         return articles
-    
+
     def select_best_articles(self, articles: List[dict]) -> List[dict]:
-        
+
         articles_text = "\n\n".join([
             f"ID: {i}\n"
-            f"Título: {article['title']}\n"
-            f"Autores: {article['authors']}\n"
-            f"Resumo: {article['summary'][:500]}..."
+            f"Title: {article['title']}\n"
+            f"Authors: {article['authors']}\n"
+            f"Abstract: {article['summary'][:500]}..."
             for i, article in enumerate(articles[:20])
         ])
-        
-        prompt = f"""Você é um especialista em Inteligência Artificial e Visão Computacional.
-        
-Analise os seguintes artigos recentes do arXiv e selecione os 3 MAIS INTERESSANTES e INOVADORES.
-Considere:
-- Novidade da pesquisa
-- Impacto potencial
-- Relevância para o campo
-- Clareza da contribuição
 
-Artigos:
+        prompt = f"""You are an expert in Artificial Intelligence and Computer Vision.
+
+Analyze the following recent arXiv papers and select the 3 MOST INTERESTING and INNOVATIVE ones.
+Consider:
+- Novelty of the research
+- Potential impact
+- Relevance to the field
+- Clarity of contribution
+
+Papers:
 {articles_text}
 
-Responda APENAS com uma lista JSON no formato:
-[{{"id": 0, "motivo": "razão breve"}}, {{"id": 1, "motivo": "razão"}}, {{"id": 2, "motivo": "razão"}}]
+Respond ONLY with a JSON list in the format:
+[{{"id": 0, "reason": "brief reason"}}, {{"id": 1, "reason": "reason"}}, {{"id": 2, "reason": "reason"}}]
 
-Não inclua nenhum texto além do JSON."""
+Do not include any text besides the JSON."""
 
         try:
             response = self.llm.invoke([HumanMessage(content=prompt)])
             response_text = response.content.strip()
-            
-            # Extrair JSON da resposta
+
             json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
             if json_match:
                 selections = json.loads(json_match.group())
                 selected = [articles[sel['id']] for sel in selections if sel['id'] < len(articles)]
                 return selected[:3]
         except Exception as e:
-            logger.error(f"Erro ao selecionar artigos: {e}")
-        
+            logger.error(f"Error selecting articles: {e}")
+
         return articles[:3]
-    
+
     def generate_article_markdown(self, article: dict, index: int) -> tuple[str, str]:
-        """Gera arquivo markdown para um artigo."""
-        logger.info(f"Gerando markdown para: {article['title']}")
-        
+        """Generates markdown file for an article."""
+        logger.info(f"Generating markdown for: {article['title']}")
+
         slug = re.sub(r'[^\w\s-]', '', article['title'].lower())
         slug = re.sub(r'[-\s]+', '-', slug)
         slug = f"{datetime.now().strftime('%Y%m%d')}-{index}-{slug[:30]}"
-        
-        summary_prompt = f"""Resuma este artigo de forma clara e técnica em 3-4 parágrafos.
 
-Título: {article['title']}
-Resumo Original: {article['summary']}
+        summary_prompt = f"""Summarize this paper clearly and technically in 3-4 paragraphs. Write in English.
 
-Não inclua referências ou explicações adicionais."""
+Title: {article['title']}
+Original Abstract: {article['summary']}
+
+Do not include references or additional explanations."""
 
         try:
             summary_response = self.llm.invoke([HumanMessage(content=summary_prompt)])
             summary = summary_response.content.strip()
         except Exception as e:
-            logger.warning(f"Erro ao gerar resumo com IA: {e}")
+            logger.warning(f"Error generating AI summary: {e}")
             summary = article['summary']
-        
+
         date_obj = datetime.fromisoformat(article['published'].replace('Z', '+00:00'))
-        formatted_date = date_obj.strftime('%d/%m/%Y')
-        
+        formatted_date = date_obj.strftime('%m/%d/%Y')
+
         frontmatter = f"""---
 title: "{article['title']}"
 date: "{formatted_date}"
 authors: "{article['authors']}"
 arxivUrl: "{article['arxiv_url']}"
-tags: "inteligência artificial, pesquisa, arxiv"
-excerpt: "Artigo recente do arXiv sobre IA"
+tags: "artificial intelligence, research, arxiv"
+excerpt: "Recent arXiv paper on AI and Computer Vision"
 ---
 """
-        
+
         content = f"""{frontmatter}
 
-## Resumo
+## Summary
 
 {summary}
 
-## Referência
+## Reference
 
 - **ArXiv ID**: {article['arxiv_id']}
 - **Link**: [{article['arxiv_id']}]({article['arxiv_url']})
-- **Autores**: {article['authors']}
-- **Publicado**: {formatted_date}
+- **Authors**: {article['authors']}
+- **Published**: {formatted_date}
 
-## Categorias
+## Categories
 
 {', '.join(article['categories'])}
 """
-        
+
         return slug, content
-    
+
     def save_articles(self, articles: List[dict]):
-        """Salva artigos como markdown files."""
-        logger.info("Salvando artigos...")
-        
+        """Saves articles as markdown files, replacing the previous week's articles."""
+        logger.info("Saving articles...")
+
         self.articles_dir.mkdir(parents=True, exist_ok=True)
-        
+
+        articles_json_path = self.articles_dir / "articles.json"
+
+        # Delete old article files
+        if articles_json_path.exists():
+            old_data = json.loads(articles_json_path.read_text())
+            for old_slug in old_data.get('slugs', []):
+                old_file = self.articles_dir / f"{old_slug}.md"
+                if old_file.exists():
+                    old_file.unlink()
+                    logger.info(f"Deleted old article: {old_file.name}")
+
         slugs = []
         for index, article in enumerate(articles):
             slug, content = self.generate_article_markdown(article, index)
-            
+
             file_path = self.articles_dir / f"{slug}.md"
             file_path.write_text(content, encoding='utf-8')
-            logger.info(f"Salvo: {file_path}")
-            
+            logger.info(f"Saved: {file_path.name}")
+
             slugs.append(slug)
-        
-        # Atualizar articles.json
-        articles_json_path = self.articles_dir / "articles.json"
-        current_data = {}
-        if articles_json_path.exists():
-            current_data = json.loads(articles_json_path.read_text())
-        
-        # Adicionar novos slugs ao início da lista
-        current_slugs = current_data.get('slugs', [])
-        updated_slugs = slugs + current_slugs
-        
-        updated_data = {'slugs': updated_slugs}
+
+        # Overwrite articles.json with only the 3 new slugs
+        updated_data = {'slugs': slugs}
         articles_json_path.write_text(
             json.dumps(updated_data, ensure_ascii=False, indent=2),
             encoding='utf-8'
         )
-        logger.info(f"Atualizado: {articles_json_path}")
-        
+        logger.info(f"Updated: {articles_json_path.name}")
+
         return slugs
-    
+
     def commit_and_push(self, article_slugs: List[str]):
-        """Faz commit e push das mudanças."""
-        logger.info("Fazendo commit e push...")
-        
+        """Commits and pushes changes."""
+        logger.info("Committing and pushing...")
+
         try:
-            # Configurar git
             self.repo.git.config('user.email', 'blog-agent@example.com')
             self.repo.git.config('user.name', 'Blog Agent')
-            
-            # Add files
+
             for slug in article_slugs:
                 self.repo.index.add([str(self.articles_dir / f"{slug}.md")])
             self.repo.index.add([str(self.articles_dir / "articles.json")])
-            
-            # Commit
-            commit_message = f"📚 Adicionados {len(article_slugs)} novos artigos do arXiv"
+
+            commit_message = f"Weekly update: {len(article_slugs)} new arXiv articles"
             self.repo.index.commit(commit_message)
-            logger.info(f"Commit realizado: {commit_message}")
-            
-            # Push
+            logger.info(f"Commit done: {commit_message}")
+
             if TOKEN:
                 origin = self.repo.remote('origin')
                 origin_url = origin.url
@@ -246,56 +243,56 @@ excerpt: "Artigo recente do arXiv sobre IA"
                     )
                     branch_name = self.repo.active_branch.name
                     self.repo.git.push(auth_url, f"HEAD:{branch_name}")
-                    logger.info("Push realizado com sucesso via TOKEN")
+                    logger.info("Push successful via TOKEN")
                 else:
                     logger.warning(
-                        "Origin remoto não está em HTTPS. Tentando push padrão sem credenciais."
+                        "Remote origin is not HTTPS. Attempting default push without credentials."
                     )
                     origin.push()
-                    logger.info("Push realizado com sucesso")
+                    logger.info("Push successful")
             else:
-                logger.warning("TOKEN não configurado, pulando push")
-                
+                logger.warning("TOKEN not configured, skipping push")
+
         except Exception as e:
-            logger.error(f"Erro ao fazer commit/push: {e}")
-    
+            logger.error(f"Error during commit/push: {e}")
+
     def run(self):
-        """Executa o pipeline completo."""
-        logger.info("Iniciando Blog Agent...")
+        """Runs the full pipeline."""
+        logger.info("Starting Blog Agent...")
 
         if self.llm is None:
             logger.error(
-                "LLM não inicializado. Verifique se GROQ_API_KEY está configurado no .env ou no ambiente."
+                "LLM not initialized. Check that GROQ_API_KEY is set in .env or the environment."
             )
             return
 
         try:
-            # 1. Buscar artigos do arXiv
+            # 1. Fetch articles from arXiv
             articles = self.fetch_arxiv_articles()
-            
+
             if not articles:
-                logger.warning("Nenhum artigo encontrado no arXiv")
+                logger.warning("No articles found on arXiv")
                 return
-            
-            # 2. Selecionar os melhores
+
+            # 2. Select the best 3
             best_articles = self.select_best_articles(articles)
-            
+
             if not best_articles:
-                logger.warning("Nenhum artigo foi selecionado")
+                logger.warning("No articles were selected")
                 return
-            
-            logger.info(f"Selecionados {len(best_articles)} artigos")
-            
-            # 3. Salvar como markdown
+
+            logger.info(f"Selected {len(best_articles)} articles")
+
+            # 3. Save as markdown (replaces previous week's articles)
             slugs = self.save_articles(best_articles)
-            
-            # 4. Fazer commit e push
+
+            # 4. Commit and push
             self.commit_and_push(slugs)
-            
-            logger.info("Blog Agent finalizado com sucesso!")
-            
+
+            logger.info("Blog Agent finished successfully!")
+
         except Exception as e:
-            logger.error(f"Erro ao executar Blog Agent: {e}")
+            logger.error(f"Error running Blog Agent: {e}")
             raise
 
 if __name__ == "__main__":
