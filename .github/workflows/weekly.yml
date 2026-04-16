@@ -1,0 +1,55 @@
+name: Weekly ArXiv Blog Articles
+
+on:
+  schedule:
+    # Executa todo domingo às 10:00 UTC
+    - cron: '0 10 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  fetch-and-post-articles:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        working-directory: ./blog-agent
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "blog-agent@github.com"
+          git config --global user.name "Blog Agent"
+
+      - name: Run Blog Agent
+        working-directory: ./blog-agent
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          python agent.py
+
+      - name: Commit and push changes
+        run: |
+          git add public/articles/
+          if ! git diff --cached --quiet; then
+            git commit -m "📚 Artigos do arXiv - $(date -u +%Y-%m-%d)"
+            git push
+          else
+            echo "Nenhuma mudança para fazer commit"
+        continue-on-error: true
