@@ -3,7 +3,7 @@ import * as Styled from './styles.js';
 const Abstract = () => (
     <>
         <Styled.Lead>
-            Software Engineer with 4+ years of experience, MSc candidate in Computer Science
+            Software Engineer with 4+ years of experience, MSc student in Computer Science
             at UFSCar researching Visual Language Models (VLMs) applied to image classification
             with multimodal inputs. Passionate about building AI-powered systems, with hands-on
             knowledge in PyTorch, Computer Vision, and applied Machine Learning. At{' '}
